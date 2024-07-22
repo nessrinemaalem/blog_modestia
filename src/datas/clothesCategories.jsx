@@ -1,4 +1,5 @@
-import { clothesListData } from './clothesList';
+import { clothesListData } from './ClothesList';
+import '../styles/ShoppingList.css'
 
 const clothesCategoriesData = [...new Set(clothesListData.map(item => item.categorie))];
 

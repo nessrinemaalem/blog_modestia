@@ -1,10 +1,11 @@
-import logo from './assets/react.svg';
+import '../styles/Banner.css';
 
-function Banner() {
+function Banner( {children}) {
   return (
-	<div className="banner">
-	 	<img src={logo} className="banner-modestia" alt="logo" />
-		<h1 title='modestia'>Modestia</h1>
+	<div className="modestia-banner">
+	 	{children}
 	</div>
   );
 }
+
+export default Banner;
