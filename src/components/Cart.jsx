@@ -1,19 +1,40 @@
 import '../styles/Cart.css'
+import { useState } from 'react'
+import React from 'react'
 
-function Cart() {
-	const chaussettesPrice = 8
-	const chaussuresPrice = 10
-	const robePrice = 15
-	return (
+function Cart({ cart, updateCart }) {
+	const [isOpen, setIsOpen] = useState(false);
+
+	function calculateTotal() {
+		return (cart.reduce((acc, clothe) => acc + clothe.price * clothe.amount, 0));
+	}
+
+	return isOpen ? (
 		<div className='modestia-cart'>
+			<button onClick={() => setIsOpen(false)}>
+				Fermer
+			</button>
 			<h2>Panier</h2>
 			<ul>
-				<li>Chaussettes : {chaussettesPrice}€</li>
-				<li>Chaussures : {chaussuresPrice}€</li>
-				<li>Robe : {robePrice}€</li>
+				{/* {cart.map((clothe) => (
+					<li key={clothe.id}>{clothe.name}: {clothe.price}$ x {clothe.amount}</li>
+				))} */}
+				{
+					cart.map(({ name, price, amount }, index) => (
+					<div key={`${name}-${index}`}>
+						{name} {price}€ x {amount}
+					</div>
+				))}
 			</ul>
-			Total : {chaussettesPrice + chaussuresPrice + robePrice}€
+			Total : {calculateTotal()}€
+			<button onClick={() => updateCart([])}>
+				Vider le panier
+			</button>
 		</div>
+	) : (
+		<button onClick={() => setIsOpen(true)}>
+			Ouvrir le Panier
+		</button>
 	)
 }
 
